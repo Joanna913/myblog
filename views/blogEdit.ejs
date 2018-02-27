@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>blog</title>
+    <link rel="stylesheet" href="/bootstrap-3.3.5-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link href="/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="/javascripts/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<div class="body-container container-fluid">
+    <div class="edit-content">
+        <form method="post">
+            <div class="form-head form-inline">
+                <div class="form-group">
+                    <label for="title"><i class="glyphicon glyphicon-paperclip"></i> </label>
+                    <% if(post) { %>
+                    <input type="text" class="form-control  input-sm" id="title" placeholder="title" name="title"
+                           value="<%= post.title %>" required="required">
+                    <% } else { %>
+                    <input type="text" class="form-control  input-sm" id="title" placeholder="title" name="title"
+                           required="required">
+                    <% } %>
+                </div>
+                <div class="form-group">
+                    <label><i class="glyphicon glyphicon-filter"></i></label>
+                    <select class="form-control blog-edit-cates-group input-sm" name="cates" required="required">
+                        <% if(post) { %>
+                        <option selected="selected"><%= post.cates %></option>
+                        <% } else { %>
+                        <% cates.forEach(function (item) { %>
+                        <option><%= item.cate %></option>
+                        <% }) %>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label><i class="glyphicon glyphicon-tag"></i></label>
+                    <select class="blog-edit-tags-group form-control  input-sm" name="tags" required="required">
+                        <% if(post) { %>
+                        <option selected="selected"><%= post.tags %></option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <% if(post) { %>
+                    <button type="submit" class="btn btn-success btn-save btn-sm" formaction="/myfex/post_to_draft/<%= post.id %>">保存草稿</button>
+                    <% } else { %>
+                    <button type="submit" class="btn btn-success btn-save btn-sm" formaction="/myfex/draft_edit">保存草稿</button>
+                    <% } %>
+                    <button type="submit" class="btn btn-success btn-post btn-sm">发表博客</button>
+                </div>
+            </div>
+            <div class="form-content">
+                <% if(post) { %>
+                <textarea name="post" class="form-control" required="required"><%- post.post %></textarea>
+                <% } else { %>
+                <textarea name="post" class="form-control" required="required"></textarea>
+                <% } %>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<%- include footer.ejs %>

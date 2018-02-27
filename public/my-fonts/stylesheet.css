@@ -1,0 +1,14 @@
+
+
+@font-face {
+    font-family: 'continuum_mediumregular';
+    src: url('contm-webfont.eot');
+    src: url('contm-webfont.eot?#iefix') format('embedded-opentype'),
+         url('contm-webfont.woff2') format('woff2'),
+         url('contm-webfont.woff') format('woff'),
+         url('contm-webfont.ttf') format('truetype'),
+         url('contm-webfont.svg#continuum_mediumregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

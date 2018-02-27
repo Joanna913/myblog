@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Yuki's FEX -- 菜鸟前端挣扎路</title>
+    <meta name="keywords" content="菜鸟,HTML, CSS, JavaScript, Node, node,react,数据结构基础,web开发" />
+    <meta name="description" content="前端开发技术博客" />
+    <meta name="author" content="chenyangjie.com" />
+    <link rel="stylesheet" href="/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link href="/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid pri-header">
+    <nav class="pri-nav ">
+        <div class="pri-nav-left">
+            <div class="pri-logo">
+                <a href="/">
+                    <span>Yuki</span>
+                    <span>Chen</span>
+                </a>
+            </div>
+        </div>
+        <%- include header.ejs %>
+        <div class="pri-nav-right">
+            <form class="navbar-form navbar-right" role="search" method="GET" action="/myfex/search">
+                <div class="form-group">
+                    <input type="text" id="navbar-search"  class="form-control input-sm" placeholder="Search" name="keyword">
+                    <a class="glyphicon glyphicon-search" aria-hidden="true"></a>
+                    <% if (user) { %>
+                    <a href="/myfex/manage" class="glyphicon glyphicon-cog" aria-hidden="true"></a>
+                    <a href="/logout" class="glyphicon glyphicon-log-out" aria-hidden="true"></a>
+                    <% } %>
+                </div>
+            </form>
+        </div>
+    </nav>
+
+</div>

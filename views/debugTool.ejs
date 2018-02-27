@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>web 代理调试工具 - By 陈央婕 </title>
+    <link rel="stylesheet" media="all" href="/debug_css/nodeppt.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="/debug_css/phone.css">
+    
+    <link rel="stylesheet" href="/debug_js/highlight/styles/monokai_sublime.css">
+    <link rel="stylesheet" href="/debug_css/font-awesome.css">
+    
+<link rel="stylesheet" href="/debug_css/theme.light.css">
+</head>
+<body>
+<div class="slides">
+    <slides id="container">
+        <slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>web调试代理工具（mac）</h1>
+<h2>Charles/Whistle/Anyproxy/Postman...</h2>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h1>基本用法</h1>
+
+</hgroup><article>
+
+<ul>
+<li>设置为系统代理</li>
+<li>过滤网络请求</li>
+<li>截取https网络封包</li>
+<li>模拟慢速网络</li>
+<li>修改网络请求</li>
+<li>修改服务器返回的内容</li>
+<li>...</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Charles</h2>
+<ul class="fadeIn">
+<li>mac平台</li>
+<li>过滤(filter/recording settings/focused)</li>
+<li>安装证书/enable ssl proxy</li>
+<li>throttle setting</li>
+<li>修改request (edit)</li>
+<li>修改response (map/rewrite/breakpoints)</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>Whistle</h2>
+<ul class="fadeIn">
+<li>node平台 (<a href="https://github.com/avwo/whistle" target="_blank">github</a>) </li>
+<li>配置模式（Rules + Values）</li>
+<li>截取https网络封包（安装证书)</li>
+<li>移动端抓包与调试（weinre）<ul>
+<li>无法调试https</li>
+</ul>
+</li>
+<li>https转http (<a href="http://whistle-ssl.www.baidu.com/" target="_blank">http://whistle-ssl.www.baidu.com/</a>)</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>anyproxy</h2>
+<ul class="fadeIn">
+<li>node平台 (<a href="https://github.com/alibaba/anyproxy" target="_blank">github</a>) </li>
+<li>RuleModule（anyproxy --rule <em>*</em>.js）<ul>
+<li><a href="https://github.com/alibaba/anyproxy/wiki/What-is-rule-file-and-how-to-write-one" target="_blank">procedure</a></li>
+<li>node module (anyproxy install)</li>
+</ul>
+</li>
+<li>https proxy</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>postman</h2>
+<ul class="fadeIn">
+<li>chrome app/扩展 (<a href="http://www.getpostman.com/docs/" target="_blank">docs</a>) </li>
+<li>postman interceptor <ul>
+<li>cookie读写（responseCookies 对象）</li>
+<li>监测请求</li>
+</ul>
+</li>
+<li>...</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><hgroup>
+<h2>others</h2>
+
+</hgroup><article>
+
+<ul>
+<li>Fiddle</li>
+<li>Wireshock <ul>
+<li>不支持手机调试</li>
+</ul>
+</li>
+<li>Httpdebug</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>对比</h2>
+<ul>
+<li>接口/规则自定义（anyproxy --rule <em>*</em>.js）</li>
+<li>截取https网络封包（安装证书)</li>
+<li>移动端抓包与调试（weinre）<ul>
+<li>无法调试https</li>
+</ul>
+</li>
+<li>https转http (<a href="http://whistle-ssl.www.baidu.com/" target="_blank">http://whistle-ssl.www.baidu.com/</a>)</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article>
+<h2>待深入研究</h2>
+<ul>
+<li>socks proxy</li>
+<li>websocket 抓包</li>
+<li>whistle https转http原理？</li>
+<li>https流量解密原理</li>
+<li>postman 深入</li>
+<li>其他工具..？</li>
+</ul>
+
+</article></section></slide>
+<slide class="slide"><section class="slide-wrapper"><article class="flexbox vcenter">
+<h1>Thx</h1>
+
+</article></section></slide>
+        
+
+        <!-- <slide class="slide logoslide dark nobackground">
+            <article class="flexbox vcenter">
+                <h2 style="color: white;">Powered By nodePPT v1.4.2</h2>
+            </article>
+        </slide> -->
+        <div class="slideTip" id="tip"></div>
+    </slides>
+</div>
+<canvas id="drawBoard" class="draw-board" width="900" height="700"></canvas>
+<div class="progress"><span id="progress"></span></div>
+<div id="_buttons">
+    <div class="_btn-box" id="_btn-box" style="display:none;">
+        <button class="fa fa-arrow-circle-left" id="_btn-prev"></button>
+        <button class="fa fa-arrow-circle-right" id="_btn-next"></button>
+        <button class="fa fa-paint-brush" id="_btn-brush"></button>
+        <button class="fa fa-compress" id="_btn-overview" data-toggle="fa fa-expand"></button>
+    </div>
+    <button class="fa fa-bars" id="_btn-bar"  data-toggle="fa fa-close"></button>
+</div>
+<script src="/debug_js/mixjs/lib/mix.0.3.0.min.js"></script>
+<script>
+var base = location.protocol + '//' + location.host;
+
+var path = (location.pathname + '#').split('/').filter(function(v){
+    return !!v;
+});
+path.pop();
+path = path.join('/');
+MixJS.config({
+    baseURL: [ base, path, 'js'].join('/')+'/'
+});
+
+</script>
+<script src="/debug_js/mixjs/lib/event/broadcast.js"></script>
+<script src="/debug_js/nodeppt.js"></script>
+<script>
+Slide.init({
+    containerID: 'container',
+    drawBoardID: 'drawBoard',
+    slideClass: '.slide',
+    buildClass: '.build',
+    progressID: 'progress',
+    transition: 'slide2',
+    width: 1100,
+    dir: './',
+    
+    //打开下面的注释就开启postMessage方式
+    //访问网址127.0.0.1:8080/ppt/demo#client
+    control:{
+        type: 'postMessage',
+        args:{
+            isControl:  false
+        }
+    },
+    
+    tipID: 'tip'
+});
+MixJS.loadJS('highlight/highlight.pack.js',function(){
+    hljs.tabReplace = '  ';
+    hljs.initHighlightingOnLoad();
+});
+</script>
+<script src="/debug_js/demo.js"></script>
+<link rel="stylesheet" href="/debug_css/demo.css">
+
+<!--placeholder-->
+</body>
+</html>

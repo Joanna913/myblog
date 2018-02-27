@@ -1,0 +1,35 @@
+<aside>
+    <% if (cates) { %>
+    <div class="thumbnail profile tags-wall">
+        <h1>TAG</h1>
+        <div class="tag-wal-body">
+            <%  tags && tags.length && tags.forEach(function (tag, index) { %>
+            <span class="label label-default"><a href="/myfex/blogs/<%= cates %>/<%= tag %>"><%= tag %></a></span>
+            <% }) %>
+        </div>
+    </div>
+    <% } %>
+
+    <div class="thumbnail profile">
+        <h1>HOT</h1>
+        <ul class="list-group">
+            <% hotPosts.forEach(function (hotPost, index) { %>
+            <li class="list-group-item">
+                <a href="/myfex/blogs/<%= hotPost.cates %>/<%= hotPost.tags %>/<%= hotPost.id %>"><%= hotPost.title %></a>
+            </li>
+            <% }) %>
+        </ul>
+    </div>
+    <div class="thumbnail profile links-wall">
+        <h1>LINKS</h1>
+        <ul class="list-group">
+            <!--<li class="list-group-item"><a href="chenyangjie.com">yuki的blog</a></li>-->
+        </ul>
+    </div>
+
+    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+        <i class="btn btn-default glyphicon glyphicon-triangle-top" title="返回顶部"></i>
+        <i class="btn btn-default glyphicon glyphicon-send" title="给我留言"></i>
+    </div>
+
+</aside>

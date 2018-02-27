@@ -1,0 +1,25 @@
+<div class="essay-comment" xmlns="http://www.w3.org/1999/html">
+    <div class="comment-body">
+        <% post.comments.reverse().forEach(function (comment, index) { %>
+        <div class="media">
+            <div class="media-body">
+                <div class="media-heading">
+                    <span class="commentator"><i class="fa fa-user fa-icon-marginR"></i><%= comment.name %></span>
+                    <span> 评论 <i><%= comment.target %> </i></span>
+                    <span class="calendar" > <i class="fa fa-calendar " ></i>
+                        <%= comment.time %></span>
+                    <span class="glyphicon-group">
+                        <% if (user) { %>
+                        <i class="glyphicon glyphicon-trash" ></i>
+                        <% } %>
+                        <i class="comment-target glyphicon glyphicon-comment" ></i>
+                    </span>
+                    <span class="comment-index"><%= post.comments.length - index  %>楼</span>
+                </div>
+                <div class="media-comment"><%- comment.content%></div>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+
+</div>

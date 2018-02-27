@@ -1,0 +1,203 @@
+<%- include homeHeader.ejs %>
+
+<div class="body-container col-md-8 col-md-offset-2">
+    <nav>
+        <ul class="nav manage-nav nav-tabs  ">
+            <li role="presentation" class="active"><a href="#">博客管理</a></li>
+            <li role="presentation"><a href="#">日志管理</a></li>
+            <li role="presentation"><a href="#">留言管理</a></li>
+            <li role="presentation"><a href="#">标签管理</a></li>
+            <li role="presentation"><a href="#">文件管理</a></li>
+            <li role="presentation"><a href="#">草稿箱</a></li>
+            <li><a href="/myfex/blog_edit">新建博客</a></li>
+        </ul>
+    </nav>
+    <div class="body-manage">
+        <div style="display: block;" class="blog-manage">
+            <form class="form-horizontal manage-form">
+                <div class="form-group">
+                    <label>分类</label>
+                    <select class="form-control blog-manage-cates-group">
+                        <option>techs</option>
+                        <option>others</option>
+                    </select>
+                </div>
+                <div class="form-group ">
+                    <label>标签</label>
+                    <select class="form-control blog-manage-tags-group">
+                    </select>
+                </div>
+
+            </form>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>标题</th>
+                    <th>分类</th>
+                    <th>标签</th>
+                    <th>日期</th>
+                    <th>阅读</th>
+                    <th>评论</th>
+                    <th>编辑</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="dairy-manage">
+            <form class="form-horizontal manage-form">
+
+            </form>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th style="width:70%">内容</th>
+                    <th style="width:20%">日期</th>
+                    <th style="width:10%">编辑</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% dairies.forEach(function(dairy) { %>
+                <tr>
+                    <td><%= dairy.post %></td>
+                    <td><%= dairy.time.day %></td>
+                    <td>
+                        <a href="/myfex/dairy_remove/<%= dairy.time.minute %>"><i class="glyphicon glyphicon-trash"></i></a>
+                    </td>
+                </tr>
+                <% }) %>
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="message-manage">
+            <form class="form-horizontal manage-form">
+            </form>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th style="width: 10%">姓名</th>
+                    <th style="width: 10%">邮箱</th>
+                    <th style="width: 70%">内容</th>
+                    <th style="width: 10%">编辑</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% messages.forEach(function(message) { %>
+                <tr>
+                    <td><%= message.name %></td>
+                    <td><%= message.email %></td>
+                    <td><%= message.message %></td>
+                    <td>
+                        <a href="/myfex/message_remove/<%= message.time.minute %>">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="tag-manage">
+            <form class="form-horizontal manage-form">
+            </form>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th class="cate">类别</th>
+                    <th class="tag">标签</th>
+                    <th class="edit">编辑</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% cates.forEach(function(item,index) { %>
+                <tr class="cate-info" id="cate-info-<%= index %>">
+                    <td class="cate-name" id="cate-name-<%= item.cate %>"><%= item.cate %></td>
+                    <td class="tags-list" id="<%= item.cate %>-tags-list">
+                        <% item.tags.forEach(function(tag) { %>
+                        <span class="label label-info"><%= tag %></span>
+                        <% }) %>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control input-sm" id="tags" placeholder="new tag" name="newTag">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </td>
+                </tr>
+                <% }) %>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="file-manage">
+            <form class="form-horizontal manage-form" method="post" action="/myfex/file_upload" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="exampleInputFile">上传文件</label>
+                    <input type="file" id="exampleInputFile1" name="exampleInputFile1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">上传文件</label>
+                    <input type="file" id="exampleInputFile2" name="exampleInputFile2">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">上传文件</label>
+                    <input type="file" id="exampleInputFile3" name="exampleInputFile3">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">上传文件</label>
+                    <input type="file" id="exampleInputFile1" name="exampleInputFile1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">上传文件</label>
+                    <input type="file" id="exampleInputFile2" name="exampleInputFile2">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">上传文件</label>
+                    <input type="file" id="exampleInputFile3" name="exampleInputFile3">
+                </div>
+                <button type="submit" class="btn btn-upload" >提交上传</button>
+            </form>
+        </div>
+        <div class="draft-manage">
+            <form class="form-horizontal manage-form">
+            </form>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>标题</th>
+                    <th>日期</th>
+                    <th>分类</th>
+                    <th>标签</th>
+                    <th>编辑</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% drafts.forEach(function(draft) { %>
+                <tr>
+                    <td><%= draft.title %></td>
+                    <td><%= draft.time.minute %></td>
+                    <td><%= draft.cates %></td>
+                    <td><%= draft.tags %></td>
+                    <td>
+                        <a href="/myfex/draft_edit/<%= draft.cates %>/<%= draft.tags %>/<%= draft.id %>">
+                            <i class="glyphicon glyphicon-pencil"></i>
+                        </a>
+                        <a href="/myfex/draft_remove/<%= draft.cates %>/<%= draft.tags %>/<%= draft.id %>">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                <% }) %>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+<%- include footer.ejs %>

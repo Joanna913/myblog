@@ -1,0 +1,74 @@
+<%- include homeHeader.ejs %>
+<%- include header.ejs %>
+<div class="body-container ">
+    <div class="container col-md-10 col-md-offset-1 content">
+        <article class=" col-md-8 essay article">
+            <nav class="nav-class">
+                <i class="fa fa-quote-left"></i> <%= post.title %>   <i class="fa fa-quote-right"></i>
+            </nav>
+            <section class="recent-article essay-tool">
+                <time class="time-line" datetime="<%= post.time.minute %>">
+                    <span>
+                        <i class="fa fa-calendar fa-icon-marginR" ></i>
+                        <%= post.time.day %>
+                    </span>
+                    <span>
+                        <a href="/myfex/blogs/html/canvas">
+                            <i class="fa fa-tags"></i>
+                            <%= post.tags %>
+                        </a>
+                    </span>
+                    <span>
+                        <% if (user) { %>
+                        <a class="fa fa-edit" href="/myfex/blog_edit/<%= post.cates %>/<%= post.tags %>/<%= post.id %>"></a>
+                        <a class="fa fa-trash-o fa-icon-marginL" href="/myfex/blog_remove/<%= post.cates %>/<%= post.tags %>/<%= post.id %>"></a>
+                        <% } %>
+                        <i class="fa fa-eye  fa-icon-marginL" ></i><%= post.pv %>
+                        <i class="fa fa-comment fa-icon-marginL"></i><%= post.comments.length %>
+                    </span>
+                </time>
+            </section>
+
+            <section class="essay-body">
+                <%- post.post %>
+            </section>
+            <%- include comment.ejs %>
+        </article>
+        <aside>
+            <% if (cates) { %>
+            <div class="thumbnail profile tagswall">
+                <h1>TAG</h1>
+                <div class="tag-wal-body">
+                    <%  tags.forEach(function (tag, index) { %>
+                    <span class="label label-default"><a href="/myfex/blogs/<%= cates %>/<%= tag %>"><%= tag %></a></span>
+                    <% }) %>
+                </div>
+            </div>
+            <% } %>
+            <div class="thumbnail profile comments-wall">
+                <h1>COMMENTS</h1>
+                <form method="post" class="form-inline comment-form" action="/myfex/blogs/<%= post.cates %>/<%= post.tags %>/<%= post.id %>/newComment">
+                    <div class="form-group">
+                        <label for="target">To</label>
+                        <input type="text" class="form-control input-sm" required="required" value="Yuki" name="target" readonly="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control input-sm" required="required" placeholder="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control input-sm" required="required" placeholder="email" name="email">
+                    </div>
+                    <textarea class="form-control" rows="4" name="content"
+                              placeholder="在这发表对文章的高见哦，thanks！" required="required"></textarea>
+
+                    <button type="submit" class="btn btn-submit">Send</button>
+                </form>
+            </div>
+
+
+        </aside>
+    </div>
+</div>
+<%- include footer.ejs %>

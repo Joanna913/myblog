@@ -1,0 +1,162 @@
+<%- include homeHeader.ejs %>
+<div class="body-container">
+    <div class="container col-md-10 col-md-offset-1 content" >
+        <article class="article col-md-8">
+            <nav class="nav-class"  >
+                <span id="daily-nav">
+                    <span class="nav-items selected">Feelings</span>
+                    &
+                    <span class="nav-items">Messages</span>
+                </span>
+                <span class="pagination">
+                    <span class=" pagination-items">
+                        <% if(!isFirstPage) { %>
+                        <a href="?p=<%= page - 1 %>" class="pre-page"><span class="fa fa-hand-o-left"></span></a>
+                        <% } else { %>
+                        <a  class="pre-page" style="color: #bcbcbc;"><span class="fa fa-hand-o-left"></span></a>
+                        <% }%>
+
+                        <a><span><%= page %></span><span>/<%= totalPage || 1 %></span></a>
+
+                        <% if(!isLastPage) { %>
+                        <a href="?p=<%= page + 1 %>" class="next-page"><span class="fa fa-hand-o-right"></span></a>
+                        <% } else { %>
+                        <a  class="next-page" style="color: #bcbcbc;"><span class="fa fa-hand-o-right"></span></a>
+                        <% }%>
+                    </span>
+                    <span class="pagination-items">
+                        <% if(!isFirstMesPage) { %>
+                        <a href="?p=<%= page - 1 %>" class="pre-page"><span class="fa fa-hand-o-left"></span></a>
+                        <% } else { %>
+                        <a  class="pre-page" style="color: #bcbcbc;"><span class="fa fa-hand-o-left"></span></a>
+                        <% }%>
+
+                        <a class="cur-page"><span><%= page %></span><span>/<%= totalMesPage || 1 %></span></a>
+
+                        <% if(!isLastMesPage) { %>
+                        <a href="?p=<%= page + 1 %>" class="next-page"><span class="fa fa-hand-o-right"></span></a>
+                        <% } else { %>
+                        <a  class="next-page" style="color: #bcbcbc;"><span class="fa fa-hand-o-right"></span></a>
+                        <% }%>
+                    </span>
+                </span>
+
+            </nav>
+            <div class="daily-container">
+                <div class="daily-container-items">
+                    <% if (dairies) { %>
+                    <%  dairies.forEach(function (dairy, index) { %>
+                    <section class="recent-article">
+                        <time class="time-line" datetime="<%= dairy.time.minute %>">
+                        <span>
+                            <i class="fa fa-calendar" style="padding-right: 10px"></i>
+                            <%= dairy.time.day %>
+                        </span>
+                        <% if (user) { %>
+                        <span>
+                            <a class="fa fa-trash-o" href="/myfex/dairy_remove/<%= dairy.time.minute %>"></a>
+                        </span>
+                        <% } %>
+                        </time>
+                        <div class="gist">
+                            <div class="message">
+                                <%= dairy.post %>
+                            </div>
+                        </div>
+                    </section>
+                    <% }) %>
+                    <% } %>
+                </div>
+
+
+                <div class="daily-container-items">
+                    <% if (messages) { %>
+                    <%  messages.forEach(function (message, index) { %>
+                    <section class="recent-article">
+                        <time class="time-line" datetime="<%= message.time.minute %>">
+                            <span>
+                                <i class="fa fa-calendar" style="padding-right: 10px"></i>
+                                <%= message.time.minute %>
+                            </span>
+                            <span>用户 : <%= message.name %></span>
+                            <% if (user) { %>
+                            <span>
+                                <a class="fa fa-trash-o" href="/myfex/message_remove/<%= message.time.minute %>"></a>
+                                <i class="fa fa-comment-o message-replay"></i>
+                            </span>
+                            <% } %>
+                        </time>
+                        <div class="gist">
+                            <div class="message">
+                                <%= message.message %>
+                            </div>
+                            <form class="reply-form" method="post" action="/myfex/message_reply/<%= message.time.minute %>">
+                                <textarea class="reply-input" name="reply"></textarea>
+                                <button class="reply-send-btn" type="submit">
+                                    <i class="fa fa-reply"></i>
+                                </button>
+                            </form>
+                            <% if( message.reply ) { %>
+                            <div class="message-reply">
+                                <time class="time-line" datetime="<%= message.time.minute %>">
+                                    <span>
+                                        <i class="fa fa-comment" style="padding-right: 10px"></i>
+                                        Yuki 回复
+                                    </span>
+                                </time>
+                                <%= message.reply %>
+                            </div>
+                            <% } %>
+                        </div>
+
+                    </section>
+                    <% }) %>
+                    <% } %>
+                </div>
+            </div>
+
+
+        </article>
+        <aside>
+            <div class="thumbnail profile">
+                <h1>HELLO</h1>
+                <div class="per-photo">
+                    <img src="/images/cyj.png" alt="cyj" >
+                </div>
+                <div class="caption">
+                    <h4>Front-end Engineer  </h4>
+                    <q>Modest, Prudent and Brilliant. </q>
+                </div>
+            </div>
+            <% if (user) { %>
+            <div class=" dairy thumbnail profile">
+                <form method="post" class="form-inline dairy-form">
+                    <textarea class="form-control" rows="3" name="content" required="required"></textarea>
+                    <button type="submit" class="btn btn-default btn-sm btn-dairy">SEND</button>
+                </form>
+            </div>
+            <% } %>
+
+            <div class="thumbnail profile messages-wall">
+                <h1>MESSAGE</h1>
+                <form method="post" class="form-inline comment-form" action="/daily/message/">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control input-sm" required="required" placeholder="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control input-sm" required="required" placeholder="email" name="email">
+                    </div>
+                    <textarea class="form-control" rows="4" required="required" name="message" placeholder="欢迎留言！欢迎指点！"></textarea>
+                    <button type="submit" class="btn btn-submit">Send</button>
+                </form>
+            </div>
+            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                <button type="button" class="btn btn-default glyphicon glyphicon-triangle-top"></button>
+                <button type="button" class="btn btn-default glyphicon glyphicon-send"></button>
+            </div>
+        </aside>
+    </div>
+</div>
+<%- include footer.ejs %>

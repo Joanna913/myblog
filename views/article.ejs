@@ -1,0 +1,49 @@
+<article class="article col-md-8">
+    <nav class="nav-class">
+        Recent    <i class="fa fa-leaf"></i>
+            <span class="pagination">
+                <% if(!isFirstPage) { %>
+                <a href="?p=<%= page - 1 %>" class="pre-page"><span class="fa fa-hand-o-left"></span></a>
+                <% } else { %>
+                <a  class="pre-page" style="color: #bcbcbc;"><span class="fa fa-hand-o-left"></span></a>
+                <% }%>
+
+                <a class="cur-page"><span><%= page %></span><span>/<%= totalPage || 1 %></span></a>
+
+                <% if(!isLastPage) { %>
+                <a href="?p=<%= page + 1 %>" class="next-page"><span class="fa fa-hand-o-right"></span></a>
+                <% } else { %>
+                <a  class="next-page" style="color: #bcbcbc;"><span class="fa fa-hand-o-right"></span></a>
+                <% }%>
+            </span>
+    </nav>
+    <% if (posts) { %>
+    <%  posts.forEach(function (post, index) { %>
+    <section class="recent-article">
+        <time class="time-line" datetime="<%= post.time.minute %>">
+            <span>
+                <i class="fa fa-calendar" style="padding-right: 10px"></i>
+                <%= post.time.day %>
+            </span>
+            <span>
+                <a href="/myfex/blogs/<%= post.cates %>/<%= post.tags %>">
+                    <i class="fa fa-tags"></i>
+                    <%= post.tags %>
+                </a>
+            </span>
+            <span>
+                <a class="continue-read" href="/myfex/blogs/<%= post.cates %>/<%= post.tags %>/<%= post.id %>">
+                    Read More
+                </a>
+            </span>
+        </time>
+        <div class="gist">
+            <h4><a href="/myfex/blogs/<%= post.cates %>/<%= post.tags %>/<%= post.id %>"><%= post.title %></a></h4>
+            <div class="brief-intro">
+                <%- post.post.replace(/<[^>]+>/g,"") %>
+            </div>
+        </div>
+    </section>
+    <% }) %>
+    <% } %>
+</article>
